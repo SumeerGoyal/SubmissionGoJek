@@ -54,7 +54,7 @@ public class ParkingLotTest {
 		inputLine = new BufferedReader(new InputStreamReader(System.in));
 		try {
 			while (!closed) {
-				System.out.println("waiting...");
+				// System.out.println("waiting...");
 				String str =  inputLine.readLine().trim();
 				System.out.println(str);
 				str.trim();
@@ -81,7 +81,8 @@ public class ParkingLotTest {
 				//park <reg> <color>
 				int slotNumber = PS.AddVehicle(carNumber, carColor);
 				//slot number to be printed is 1 more than the index returned
-				System.out.println("Allocated slot number: " + slotNumber);
+				if (slotNumber >= 1)
+					System.out.println("Allocated slot number: " + slotNumber);
 			}
 			else if (str.startsWith("leave")) {
 					String[] tokens = str.split(" ");

@@ -6,7 +6,7 @@ public class ParkingSlot {
 	public SlotList parkingSlot;
 	
 	public ParkingSlot() {
-		System.out.println("test");
+		// System.out.println("test");
 	}
 	public ParkingSlot(int number) {
 		System.out.println("Created a parking lot with " + number + " slots");
