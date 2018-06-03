@@ -1,0 +1,3 @@
+javac *.java
+jar cvfm GoJek.jar Manifest.txt *.class
+java -jar GoJek.jar "$1"
