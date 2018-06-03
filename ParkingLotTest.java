@@ -20,7 +20,7 @@ public class ParkingLotTest {
 	    
 		
 	    if (args.length > 0) {
-	    	System.out.println(args[0]);
+	    	// System.out.println(args[0]);
 			String fileName = args[0];        
 			String line = null;
 
@@ -32,7 +32,7 @@ public class ParkingLotTest {
 			    BufferedReader bufferedReader = new BufferedReader(fileReader);
 
 			    while((line = bufferedReader.readLine()) != null) {
-			    	System.out.println(line);
+			    	// System.out.println(line);
 			    	handle_read_string(line);
 			    }   
 
@@ -56,7 +56,7 @@ public class ParkingLotTest {
 			while (!closed) {
 				// System.out.println("waiting...");
 				String str =  inputLine.readLine().trim();
-				System.out.println(str);
+				// System.out.println(str);
 				str.trim();
 				handle_read_string(str);
 			
@@ -70,56 +70,84 @@ public class ParkingLotTest {
 
 		if (str.startsWith("create_parking_lot")) {
 				String[] tokens = str.split(" ");
-				int number = Integer.parseInt(tokens[1]);	
-				PS = new ParkingSlot(number);
+				if (tokens.length <= 1){
+					System.out.println("not enough arguments in create_parking_lot");
+				}
+				else{
+					int number = Integer.parseInt(tokens[1]);	
+					PS = new ParkingSlot(number);
+				}
 			}
 		else
 			if (str.startsWith("park")) {
 				String[] tokens = str.split(" ");
-				String carNumber = tokens[1];
-				String carColor = tokens[2];
-				//park <reg> <color>
-				int slotNumber = PS.AddVehicle(carNumber, carColor);
-				//slot number to be printed is 1 more than the index returned
-				if (slotNumber >= 1)
-					System.out.println("Allocated slot number: " + slotNumber);
+				if (tokens.length <= 2){
+					System.out.println("not enough arguments in park");
+				}
+				else{
+					
+					String carNumber = tokens[1];
+					String carColor = tokens[2];
+					//park <reg> <color>
+					int slotNumber = PS.AddVehicle(carNumber, carColor);
+					//slot number to be printed is 1 more than the index returned
+					if (slotNumber >= 1)
+						System.out.println("Allocated slot number: " + slotNumber);
+				}
 			}
 			else if (str.startsWith("leave")) {
 					String[] tokens = str.split(" ");
-					int slotNumber = Integer.parseInt(tokens[1]);	
-					//leave <slotNumber>
-					//error checks have to be put in
-					PS.removeVehicle(slotNumber);
-					System.out.println("Slot number " + slotNumber + " is free");
-			
+					if (tokens.length <= 1){
+						System.out.println("not enough arguments in leave");
+					} else
+					{
+						int slotNumber = Integer.parseInt(tokens[1]);	
+						//leave <slotNumber>
+						//error checks have to be put in
+						PS.removeVehicle(slotNumber);
+						System.out.println("Slot number " + slotNumber + " is free");
+					}
 			} else if (str.startsWith("status")) {
 				PS.getParkingStatus();
 			}
 			else if (str.startsWith("registration_numbers_for_cars_with_colour")) {
 				
 				String[] tokens = str.split(" ");
-				String carColor = tokens[1];
-				// System.out.println("inside registration_numbers_for_cars_with_colour " + carColor);
-				String retString = PS.handle_registration_number_for_cars_with_color(carColor);
-			
+				if (tokens.length <= 1){
+					System.out.println("not enough arguments in registration_numbers_for_cars_with_colour");
+				}
+				else {
+					String carColor = tokens[1];
+					// System.out.println("inside registration_numbers_for_cars_with_colour " + carColor);
+					String retString = PS.handle_registration_number_for_cars_with_color(carColor);
+				}
 			}
 			else if (str.startsWith("slot_numbers_for_cars_with_colour")) {
 				
 				String[] tokens = str.split(" ");
-				String carColor = tokens[1];
-				String retStr = PS.handle_slot_number_for_cars_with_color(carColor);
-				// System.out.println("slot for color " + carColor + "is " + retStr);
-			
+				if (tokens.length <= 1){
+					System.out.println("not enough arguments in slot_numbers_for_cars_with_colour");
+				}
+				else {
+					String carColor = tokens[1];
+					String retStr = PS.handle_slot_number_for_cars_with_color(carColor);
+					// System.out.println("slot for color " + carColor + "is " + retStr);
+				}
 			} else if (str.startsWith("slot_number_for_registration_number")) {
 				String[] tokens = str.split(" ");
-				String carReg = tokens[1];
-				// System.out.println("reg number " + carReg + " fo slot");
-				int slotNumber = PS.handle_slot_number_for_registration_number(carReg);
-				if (slotNumber > 0)
-					System.out.println(slotNumber);
-				else
-					System.out.println("Not found");
+				if (tokens.length <= 1){
+					System.out.println("not enough arguments in slot_number_for_registration_number");
+				}else
+				{
+					String carReg = tokens[1];
+					// System.out.println("reg number " + carReg + " fo slot");
+					int slotNumber = PS.handle_slot_number_for_registration_number(carReg);
+					if (slotNumber > 0)
+						System.out.println(slotNumber);
+					else
+						System.out.println("Not found");
 					
+			}
 			}
 	}
 }

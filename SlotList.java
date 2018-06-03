@@ -6,7 +6,8 @@ public class SlotList {
 	Slots[] slotList;
 	
 	SlotList(){
-		
+		slotNumbers = -1;
+		slotList = null;
 	}
 	SlotList(int noOfSlots){
 		slotNumbers = noOfSlots;
